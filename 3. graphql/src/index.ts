@@ -33,7 +33,7 @@ const nexusPrisma = nexusPrismaMethod({
     title: String!
     description: String
     released: Boolean!
-    mainHero: Hero
+    mainCharacter: Hero
   }
  */
 
@@ -59,7 +59,7 @@ const Query = objectType({
   type Mutation {
     signupHero(data: HeroCreateInput!): Hero! # directly from crud
     deleteMovie(id: ID!): Movie!
-    createMovie(description: String, mainHeroEmail: String, title: String): Movie!
+    createMovie(description: String, mainCharacterEmail: String, title: String): Movie!
     release(id: ID): Movie
   }
  */

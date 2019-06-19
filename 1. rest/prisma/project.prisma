@@ -25,5 +25,5 @@ TODO: Create a Movie model with:
 - released (boolean)
 - title
 - description (optional)
-- mainHero (optional)
+- mainCharacter (optional)
 */

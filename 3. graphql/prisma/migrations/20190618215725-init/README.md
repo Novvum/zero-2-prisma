@@ -8,7 +8,7 @@ You can check out the [state of the datamodel](./datamodel.prisma) after the mig
 ```sql
 CREATE TABLE "file:dev"."Hero"("id" TEXT NOT NULL  ,"email" TEXT NOT NULL DEFAULT '' ,"name" TEXT   ,PRIMARY KEY ("id"));
 
-CREATE TABLE "file:dev"."Movie"("id" TEXT NOT NULL  ,"createdAt" DATE NOT NULL  ,"updatedAt" DATE NOT NULL DEFAULT '1970-01-01 00:00:00' ,"released" BOOLEAN NOT NULL DEFAULT false ,"title" TEXT NOT NULL DEFAULT '' ,"description" TEXT   ,"mainHero" TEXT   REFERENCES Hero(id),PRIMARY KEY ("id"));
+CREATE TABLE "file:dev"."Movie"("id" TEXT NOT NULL  ,"createdAt" DATE NOT NULL  ,"updatedAt" DATE NOT NULL DEFAULT '1970-01-01 00:00:00' ,"released" BOOLEAN NOT NULL DEFAULT false ,"title" TEXT NOT NULL DEFAULT '' ,"description" TEXT   ,"mainCharacter" TEXT   REFERENCES Hero(id),PRIMARY KEY ("id"));
 ```
 
 ## Changes
@@ -49,7 +49,7 @@ migration ..20190618215725-init
 +    released     Boolean
 +    title        String
 +    description  String?
-+    mainHero     Hero?
++    mainCharacter     Hero?
 +}
 ```
 
@@ -59,15 +59,14 @@ You can use a specific Photon built for this migration (20190618215725-init)
 in your `before` or `after` migration script like this:
 
 ```ts
-import Photon from '@generated/photon/20190618215725-init'
+import Photon from "@generated/photon/20190618215725-init";
 
-const photon = new Photon()
+const photon = new Photon();
 
 async function main() {
-  const result = await photon.users()
-  console.dir(result, { depth: null })
+  const result = await photon.users();
+  console.dir(result, { depth: null });
 }
 
-main()
-
+main();
 ```

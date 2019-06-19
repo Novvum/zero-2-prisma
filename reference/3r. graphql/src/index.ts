@@ -30,7 +30,7 @@ export const Movie = objectType({
     t.model.title();
     t.model.description();
     t.model.released();
-    t.model.mainHero();
+    t.model.mainCharacter();
   }
 });
 
@@ -102,16 +102,16 @@ const Mutation = objectType({
       args: {
         title: stringArg(),
         description: stringArg({ nullable: true }),
-        mainHeroEmail: stringArg()
+        mainCharacterEmail: stringArg()
       },
-      resolve: (parent, { title, description, mainHeroEmail }, ctx) => {
+      resolve: (parent, { title, description, mainCharacterEmail }, ctx) => {
         return ctx.photon.movies.create({
           data: {
             title,
             description,
             released: false,
-            mainHero: {
-              connect: { email: mainHeroEmail }
+            mainCharacter: {
+              connect: { email: mainCharacterEmail }
             }
           }
         });

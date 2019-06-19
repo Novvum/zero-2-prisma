@@ -17,18 +17,18 @@ app.post(`/hero`, async (req, res) => {
 });
 
 app.post(`/movie`, async (req, res) => {
-  const { title, mainHeroEmail, description } = req.body;
+  const { title, mainCharacterEmail, description } = req.body;
   const movie = photon.movies.create({
     data: {
       title: title,
       released: false,
       description: description,
-      mainHero: { connect: { email: mainHeroEmail } } // TODO: Fix after https://github.com/prisma/photonjs/issues/30
+      mainCharacter: { connect: { email: mainCharacterEmail } } // TODO: Fix after https://github.com/prisma/photonjs/issues/30
     }
   });
   res.json({
     ...(await movie),
-    mainHero: await movie.mainHero()
+    mainCharacter: await movie.mainCharacter()
   });
 });
 
