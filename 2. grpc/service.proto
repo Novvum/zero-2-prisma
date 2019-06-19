@@ -1,70 +1,74 @@
 syntax = "proto3";
 
-package blog;
+package mcu;
 
-service Blog {
-  // Read operations
-  rpc Feed(FeedRequest) returns (FeedResponse) {};
-  rpc FilterPosts(FilterPostsRequest) returns (FilterPostsResponse) {};
-  rpc Post(PostRequest) returns (Post) {};
-
-  // Write operations
-  rpc SignupUser(SignupUserRequest) returns (User) {};
-  rpc CreateDraft(CreateDraftRequest) returns (Post) {};
-  rpc DeletePost(DeletePostRequest) returns (Post) {};
-  rpc Publish(PublishRequest) returns (Post) {};
+service MCU {
+  rpc FilteredMovies(FilteredMoviesRequest) returns (FilteredMoviesResponse) {};
+  rpc FilteredCharacters(FilteredCharactersRequest) returns(FilteredCharactersResponse) {};
 }
 
-message Post {
+
+
+message Movie {
   string id = 1;
   string createdAt = 2;
   string updatedAt = 3;
-  string title = 4;
-  string content = 5;
-  bool published = 6;
-  User author = 7; 
+  string film = 4;
+  number releaseYear = 5;
+  number budget = 6;
+  number runningTime = 7;
+  number domesticGross = 8;
+  number weekendGross - 9;
+  number overseasGross = 10;
+  number worldwideGross = 11;
+  Characters characters = 12;
+
 }
 
-message User {
+message Character {
   string id = 1;
-  string email = 2;
-  string name = 3;
-  repeated Post posts = 4;
+  string createdAt = 2;
+  string updatedAt = 3;
+  string marvelId = 4;
+  string name = 5;
+  string description = 6;
+  string thumbnail = 7;
+  Movies movies = 8;
 }
 
-message FeedRequest {}
-
-message FeedResponse {
-  repeated Post feed = 1;
+message Characters {
+  repeated Character id = 1;
 }
 
-message FilterPostsRequest {
+message Movies {
+  repeated Movie id = 1;
+}
+
+message MovieRequest {
+  string film = 1;
+}
+
+
+message MovieResponse {
+  repeated Movie id = 1;
+}
+
+message CharacterRequest {
+  string name = 1;
+}
+
+message FilteredMoviesRequest {
   string searchString = 1;
 }
 
-message FilterPostsResponse {
-  repeated Post filteredPosts = 1;
+message FilteredMoviesResponse {
+  repeated Movie filteredMovie = 1;
 }
 
-message PostRequest {
-  string id = 1;
+message FilteredCharactersRequest {
+  string searchString = 1;
 }
 
-message SignupUserRequest {
-  string name = 1;
-  string email = 2;
-}
-
-message CreateDraftRequest {
-  string title = 1;
-  string content = 2;
-  string authorEmail = 3;
-}
-
-message PublishRequest {
-  string id = 1;
-}
-
-message DeletePostRequest {
-  string id = 1;
+message FilteredCharactersResponse {
+  repeated Movie filteredMovie = 1;
 }

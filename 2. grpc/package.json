@@ -13,12 +13,8 @@
 		"start": "ts-node ./server/server.ts",
 		"seed": "ts-node prisma/seed.ts",
 		"feed": "ts-node ./client/feed.ts",
-		"filterPosts": "ts-node ./client/filterPosts.ts",
-		"post": "ts-node ./client/post.ts",
-		"signupUser": "ts-node ./client/signupUser.ts",
-		"createDraft": "ts-node ./client/createDraft.ts",
-		"publish": "ts-node ./client/publish.ts",
-		"deletePost": "ts-node ./client/deletePost.ts"
+		"filterCharacters": "ts-node ./client/filterCharacters.ts",
+		"filterMovies": "ts-node ./client/filterMovies.ts"
 	},
 	"devDependencies": {
 		"prisma2": "^0.0.78",
