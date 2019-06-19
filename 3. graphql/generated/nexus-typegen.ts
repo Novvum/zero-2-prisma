@@ -4,7 +4,6 @@
  */
 
 import * as ctx from "../src/types"
-import * as photon from "@generated/photon"
 import { core } from "nexus"
 
 declare global {
@@ -19,33 +18,12 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  HeroCreateInput: { // input type
-    email: string; // String!
-    id?: string | null; // ID
-    movies?: NexusGenInputs['MovieCreateManyWithoutMoviesInput'] | null; // MovieCreateManyWithoutMoviesInput
-    name?: string | null; // String
-  }
-  MovieCreateManyWithoutMoviesInput: { // input type
-    connect?: NexusGenInputs['MovieWhereUniqueInput'][] | null; // [MovieWhereUniqueInput!]
-    create?: NexusGenInputs['MovieCreateWithoutMainHeroInput'][] | null; // [MovieCreateWithoutMainHeroInput!]
-  }
-  MovieCreateWithoutMainHeroInput: { // input type
-    description?: string | null; // String
-    id?: string | null; // ID
-    released: boolean; // Boolean!
-    title: string; // String!
-  }
-  MovieWhereUniqueInput: { // input type
-    id?: string | null; // ID
-  }
 }
 
 export interface NexusGenEnums {
 }
 
 export interface NexusGenRootTypes {
-  Hero: photon.Hero;
-  Movie: photon.Movie;
   Mutation: {};
   Query: {};
   String: string;
@@ -56,73 +34,18 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
-  HeroCreateInput: NexusGenInputs['HeroCreateInput'];
-  MovieCreateManyWithoutMoviesInput: NexusGenInputs['MovieCreateManyWithoutMoviesInput'];
-  MovieCreateWithoutMainHeroInput: NexusGenInputs['MovieCreateWithoutMainHeroInput'];
-  MovieWhereUniqueInput: NexusGenInputs['MovieWhereUniqueInput'];
 }
 
 export interface NexusGenFieldTypes {
-  Hero: { // field return type
-    email: string; // String!
-    id: string; // ID!
-    movies: NexusGenRootTypes['Movie'][] | null; // [Movie!]
-    name: string | null; // String
-  }
-  Movie: { // field return type
-    description: string | null; // String
-    id: string; // ID!
-    mainHero: NexusGenRootTypes['Hero'] | null; // Hero
-    released: boolean; // Boolean!
-    title: string; // String!
-  }
   Mutation: { // field return type
-    createMovie: NexusGenRootTypes['Movie']; // Movie!
-    deleteMovie: NexusGenRootTypes['Movie']; // Movie!
-    release: NexusGenRootTypes['Movie'] | null; // Movie
-    signupHero: NexusGenRootTypes['Hero']; // Hero!
+    _noop: boolean; // Boolean!
   }
   Query: { // field return type
-    feed: NexusGenRootTypes['Movie'][]; // [Movie!]!
-    filterMovies: NexusGenRootTypes['Movie'][]; // [Movie!]!
-    movie: NexusGenRootTypes['Movie'] | null; // Movie
+    _noop: boolean; // Boolean!
   }
 }
 
 export interface NexusGenArgTypes {
-  Hero: {
-    movies: { // args
-      after?: string | null; // String
-      before?: string | null; // String
-      first?: number | null; // Int
-      last?: number | null; // Int
-      skip?: number | null; // Int
-    }
-  }
-  Mutation: {
-    createMovie: { // args
-      description?: string | null; // String
-      mainHeroEmail?: string | null; // String
-      title?: string | null; // String
-    }
-    deleteMovie: { // args
-      id: string; // ID!
-    }
-    release: { // args
-      id?: string | null; // ID
-    }
-    signupHero: { // args
-      data: NexusGenInputs['HeroCreateInput']; // HeroCreateInput!
-    }
-  }
-  Query: {
-    filterMovies: { // args
-      searchString?: string | null; // String
-    }
-    movie: { // args
-      where: NexusGenInputs['MovieWhereUniqueInput']; // MovieWhereUniqueInput!
-    }
-  }
 }
 
 export interface NexusGenAbstractResolveReturnTypes {
@@ -130,9 +53,9 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Hero" | "Movie" | "Mutation" | "Query";
+export type NexusGenObjectNames = "Mutation" | "Query";
 
-export type NexusGenInputNames = "HeroCreateInput" | "MovieCreateManyWithoutMoviesInput" | "MovieCreateWithoutMainHeroInput" | "MovieWhereUniqueInput";
+export type NexusGenInputNames = never;
 
 export type NexusGenEnumNames = never;
 
