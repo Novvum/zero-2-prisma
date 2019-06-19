@@ -1,0 +1,13 @@
+{
+  "version": "0.0.106",
+  "steps": [
+    {
+      "stepType": "UpdateField",
+      "model": "Movie",
+      "name": "budget",
+      "type": {
+        "Base": "Float"
+      }
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-[
+export const mcu = [
 	{
 		"film": "The Avengers",
 		"releaseYear": 2012,

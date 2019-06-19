@@ -26,7 +26,7 @@ model Movie {
     updatedAt DateTime @updatedAt
     film String
     releaseYear Int?
-    budget Float?
+    budget Int?
     runningTime Int?
     domesticGross Int?
     weekendGross Int?
