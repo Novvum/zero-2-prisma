@@ -4,7 +4,7 @@ package mcu;
 
 service MCU {
   rpc FilterMovies(FilteredMoviesRequest) returns (FilteredMoviesResponse) {};
-  rpc FilterHeroes(stream FilteredHeroesRequest) returns(stream FilteredHeroesResponse) {};
+  rpc FilterHeroes(FilteredHeroesRequest) returns(FilteredHeroesResponse) {};
 }
 
 message Movie {
