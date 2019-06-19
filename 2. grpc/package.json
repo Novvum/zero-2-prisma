@@ -13,7 +13,7 @@
 		"start": "ts-node ./server/server.ts",
 		"seed": "ts-node prisma/seed.ts",
 		"feed": "ts-node ./client/feed.ts",
-		"filterCharacters": "ts-node ./client/filterHeroes.ts",
+		"filterHeroes": "ts-node ./client/filterHeroes.ts",
 		"filterMovies": "ts-node ./client/filterMovies.ts"
 	},
 	"devDependencies": {

@@ -4,7 +4,7 @@ package mcu;
 
 service MCU {
   rpc FilterMovies(FilteredMoviesRequest) returns (FilteredMoviesResponse) {};
-  rpc FilterHeroes(FilteredHeroesRequest) returns(FilteredHeroesResponse) {};
+  rpc FilterHeroes(stream FilteredHeroesRequest) returns(stream FilteredHeroesResponse) {};
 }
 
 
@@ -16,7 +16,7 @@ message Movie {
   bool released = 4;
   string title = 5;
   string description = 6;
-  repeated Hero mainHero = 7;
+  repeated Hero mainCharacter = 7;
 
 }
 

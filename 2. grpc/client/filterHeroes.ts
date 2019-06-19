@@ -17,7 +17,7 @@ function main() {
 		grpc.credentials.createInsecure()
 	);
 
-	client.filteredCharacters({ searchString: '' }, (err: any, response: any) => {
+	client.filterHeroes({ searchString: '' }, (err: any, response: any) => {
 		if (err) {
 			console.error(err);
 			return;

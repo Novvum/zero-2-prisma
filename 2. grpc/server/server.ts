@@ -5,7 +5,7 @@ import Photon from '@generated/photon';
 import * as grpc from 'grpc';
 import * as protoLoader from '@grpc/proto-loader';
 
-const photon = new Photon();
+const photon = new Photon({ debug: true });
 
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 	keepCase: true,
@@ -39,7 +39,7 @@ async function filterMovies(call: any, callback: any) {
 		where: {
 			OR: [
 				{
-					film: {
+					title: {
 						contains: searchString
 					}
 				}
@@ -49,9 +49,9 @@ async function filterMovies(call: any, callback: any) {
 	callback(null, { filteredMovies });
 }
 
-async function filterCharacters(call: any, callback: any) {
+async function filterHeroes(call: any, callback: any) {
 	const { searchString } = call.request;
-	const filteredCharacters = await photon.characters.findMany({
+	const filterHeroes = await photon.heroes.findMany({
 		where: {
 			OR: [
 				{
@@ -62,12 +62,12 @@ async function filterCharacters(call: any, callback: any) {
 			]
 		}
 	});
-	callback(null, { filteredCharacters });
+	callback(null, { filterHeroes });
 }
 const server = new grpc.Server();
 server.addService(mcu.MCU.service, {
 	filterMovies,
-	filterCharacters
+	filterHeroes
 });
 server.bind('0.0.0.0:50051', grpc.ServerCredentials.createInsecure());
 const message = `
@@ -77,7 +77,7 @@ The gRPC server is being started on ${chalk.bold(
 
 ${chalk.bold(`$ npm run filterMovies`)}
 or
-${chalk.bold(`$ npm run filterCharacters`)}
+${chalk.bold(`$ npm run filterHeroes`)}
 
 See ${chalk.bold(
 	`package.json`
