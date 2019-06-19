@@ -3,8 +3,8 @@ syntax = "proto3";
 package mcu;
 
 service MCU {
-  rpc FilteredMovies(FilteredMoviesRequest) returns (FilteredMoviesResponse) {};
-  rpc FilteredCharacters(FilteredCharactersRequest) returns(FilteredCharactersResponse) {};
+  rpc FilterMovies(FilteredMoviesRequest) returns (FilteredMoviesResponse) {};
+  rpc FilterCharacters(FilteredCharactersRequest) returns(FilteredCharactersResponse) {};
 }
 
 
