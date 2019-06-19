@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package mcu;
+
+service MCU {
+  rpc FilterMovies(FilteredMoviesRequest) returns (FilteredMoviesResponse) {};
+  rpc FilterHeroes(stream FilteredHeroesRequest) returns(stream FilteredHeroesResponse) {};
+}
+
+message Movie {
+  string id = 1;
+  string createdAt = 2;
+  string updatedAt = 3;
+  bool released = 4;
+  string title = 5;
+  string description = 6;
+  repeated Hero mainCharacter = 7;
+
+}
+
+message Hero {
+  string id = 1;
+  string createdAt = 2;
+  string updatedAt = 3;
+  string email = 4;
+  string name = 5;
+  Movie movies = 6;
+}
+
+message FilteredMoviesRequest {
+  string searchString = 1;
+}
+
+message FilteredMoviesResponse {
+  repeated Movie filteredMovie = 1;
+}
+
+message FilteredHeroesRequest {
+  string searchString = 1;
+}
+
+message FilteredHeroesResponse {
+  repeated Hero filteredHero = 1;
+}

@@ -1,0 +1,24 @@
+{
+	"name": "@zero-2-prisma/grpc",
+	"dependencies": {
+		"@grpc/proto-loader": "0.5.1",
+		"@types/graphql": "14.2.1",
+		"@types/ws": "6.0.1",
+		"chalk": "2.4.2",
+		"grpc": "1.21.1",
+		"prisma-client-lib": "1.34.0",
+		"protobufjs": "6.8.8"
+	},
+	"scripts": {
+		"start": "ts-node ./server/server.ts",
+		"seed": "ts-node prisma/seed.ts",
+		"feed": "ts-node ./client/feed.ts",
+		"filterHeroes": "ts-node ./client/filterHeroes.ts",
+		"filterMovies": "ts-node ./client/filterMovies.ts"
+	},
+	"devDependencies": {
+		"prisma2": "^0.0.78",
+		"ts-node": "8.0.2",
+		"typescript": "3.5.2"
+	}
+}
