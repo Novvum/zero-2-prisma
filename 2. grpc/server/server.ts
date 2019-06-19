@@ -35,15 +35,12 @@ const { mcu } = grpc.loadPackageDefinition(packageDefinition) as any;
 
 async function filterMovies(call: any, callback: any) {
 	const { searchString } = call.request;
+	console.log(searchString);
 	const filteredMovies = await photon.movies.findMany({
 		where: {
-			OR: [
-				{
-					title: {
-						contains: searchString
-					}
-				}
-			]
+			title: {
+				contains: searchString
+			}
 		}
 	});
 	callback(null, { filteredMovies });
@@ -51,18 +48,16 @@ async function filterMovies(call: any, callback: any) {
 
 async function filterHeroes(call: any, callback: any) {
 	const { searchString } = call.request;
-	const filterHeroes = await photon.heroes.findMany({
+	console.log(searchString);
+	const filteredHeroes = await photon.heroes.findMany({
 		where: {
-			OR: [
-				{
-					name: {
-						contains: searchString
-					}
-				}
-			]
+			name: {
+				contains: searchString
+			}
 		}
 	});
-	callback(null, { filterHeroes });
+	console.log(filteredHeroes);
+	callback(null, { filteredHeroes });
 }
 const server = new grpc.Server();
 server.addService(mcu.MCU.service, {

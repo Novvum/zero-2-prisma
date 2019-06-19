@@ -17,13 +17,16 @@ function main() {
 		grpc.credentials.createInsecure()
 	);
 
-	client.filterHeroes({ searchString: '' }, (err: any, response: any) => {
-		if (err) {
-			console.error(err);
-			return;
+	client.filterHeroes(
+		{ searchString: 'Iron Man' },
+		(err: any, response: any) => {
+			if (err) {
+				console.error(err);
+				return;
+			}
+			console.log(response);
 		}
-		console.log(response);
-	});
+	);
 }
 
 main();
