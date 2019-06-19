@@ -11,53 +11,52 @@ const nexusPrisma = nexusPrismaMethod({
   photon: (ctx: Context) => ctx.photon
 });
 
-export const User = objectType({
-  name: "User",
+export const Hero = objectType({
+  name: "Hero",
   definition(t) {
     t.model.id();
     t.model.name();
     t.model.email();
-    t.model.posts({
+    t.model.movies({
       pagination: false
     });
   }
 });
 
-export const Post = objectType({
-  name: "Post",
+export const Movie = objectType({
+  name: "Movie",
   definition(t) {
     t.model.id();
     t.model.title();
-    t.model.content();
-    // t.model.createdAt()
-    // t.model.updatedAt()
-    t.model.published();
+    t.model.description();
+    t.model.released();
+    t.model.mainHero();
   }
 });
 
 const Query = objectType({
   name: "Query",
   definition(t) {
-    t.crud.findOnePost({
-      alias: "post"
+    t.crud.findOneMovie({
+      alias: "movie"
     });
 
     t.list.field("feed", {
-      type: "Post",
+      type: "Movie",
       resolve: (parent, args, ctx) => {
-        return ctx.photon.posts.findMany({
-          where: { published: true }
+        return ctx.photon.movies.findMany({
+          where: { released: true }
         });
       }
     });
 
-    t.list.field("filterPosts", {
-      type: "Post",
+    t.list.field("filterMovies", {
+      type: "Movie",
       args: {
         searchString: stringArg({ nullable: true })
       },
       resolve: (parent, { searchString }, ctx) => {
-        return ctx.photon.posts.findMany({
+        return ctx.photon.movies.findMany({
           where: {
             OR: [
               {
@@ -66,7 +65,7 @@ const Query = objectType({
                 }
               },
               {
-                content: {
+                description: {
                   contains: searchString
                 }
               }
@@ -81,40 +80,54 @@ const Query = objectType({
 const Mutation = objectType({
   name: "Mutation",
   definition(t) {
-    t.crud.createOneUser({ alias: "signupUser" });
-    t.crud.deleteOnePost();
-
-    t.field("createDraft", {
-      type: "Post",
+    t.crud.createOneHero({ alias: "signupHero" });
+    t.field("deleteMovie", {
+      type: "Movie",
       args: {
-        title: stringArg(),
-        content: stringArg({ nullable: true }),
-        authorEmail: stringArg()
+        id: idArg({
+          nullable: false
+        })
       },
-      resolve: (parent, { title, content, authorEmail }, ctx) => {
-        return ctx.photon.posts.create({
-          data: {
-            title,
-            content,
-            published: false
-            // author: {
-            //   connect: { email: authorEmail },
-            // },
+      resolve: (parent, { id }, ctx) => {
+        return ctx.photon.movies.delete({
+          where: {
+            id: id
           }
         });
       }
     });
 
-    t.field("publish", {
-      type: "Post",
+    t.field("createMovie", {
+      type: "Movie",
+      args: {
+        title: stringArg(),
+        description: stringArg({ nullable: true }),
+        mainHeroEmail: stringArg()
+      },
+      resolve: (parent, { title, description, mainHeroEmail }, ctx) => {
+        return ctx.photon.movies.create({
+          data: {
+            title,
+            description,
+            released: false,
+            mainHero: {
+              connect: { email: mainHeroEmail }
+            }
+          }
+        });
+      }
+    });
+
+    t.field("release", {
+      type: "Movie",
       nullable: true,
       args: {
         id: idArg()
       },
       resolve: (parent, { id }, ctx) => {
-        return ctx.photon.posts.update({
+        return ctx.photon.movies.update({
           where: { id },
-          data: { published: true }
+          data: { released: true }
         });
       }
     });
@@ -122,7 +135,7 @@ const Mutation = objectType({
 });
 
 const schema = makeSchema({
-  types: [Query, Mutation, Post, User, nexusPrisma],
+  types: [Query, Mutation, Movie, Hero, nexusPrisma],
   outputs: {
     typegen: join(__dirname, "../generated/nexus-typegen.ts"),
     schema: join(__dirname, "/schema.graphql")

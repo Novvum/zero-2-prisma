@@ -2,52 +2,53 @@
 ### Do not make changes to this file directly
 
 
-type Mutation {
-  createDraft(authorEmail: String, content: String, title: String): Post!
-  deleteOnePost(where: PostWhereUniqueInput!): Post
-  publish(id: ID): Post
-  signupUser(data: UserCreateInput!): User!
-}
-
-type Post {
-  content: String
+type Hero {
+  email: String!
   id: ID!
-  published: Boolean!
+  movies(after: String, before: String, first: Int, last: Int, skip: Int): [Movie!]
+  name: String
+}
+
+input HeroCreateInput {
+  email: String!
+  id: ID
+  movies: MovieCreateManyWithoutMoviesInput
+  name: String
+}
+
+type Movie {
+  description: String
+  id: ID!
+  mainHero: Hero
+  released: Boolean!
   title: String!
 }
 
-input PostCreateManyWithoutPostsInput {
-  connect: [PostWhereUniqueInput!]
-  create: [PostCreateWithoutAuthorInput!]
+input MovieCreateManyWithoutMoviesInput {
+  connect: [MovieWhereUniqueInput!]
+  create: [MovieCreateWithoutMainHeroInput!]
 }
 
-input PostCreateWithoutAuthorInput {
-  content: String
+input MovieCreateWithoutMainHeroInput {
+  description: String
   id: ID
-  published: Boolean!
+  released: Boolean!
   title: String!
 }
 
-input PostWhereUniqueInput {
+input MovieWhereUniqueInput {
   id: ID
+}
+
+type Mutation {
+  createMovie(description: String, mainHeroEmail: String, title: String): Movie!
+  deleteMovie(id: ID!): Movie!
+  release(id: ID): Movie
+  signupHero(data: HeroCreateInput!): Hero!
 }
 
 type Query {
-  feed: [Post!]!
-  filterPosts(searchString: String): [Post!]!
-  post(where: PostWhereUniqueInput!): Post
-}
-
-type User {
-  email: String!
-  id: ID!
-  name: String
-  posts(after: String, before: String, first: Int, last: Int, skip: Int): [Post!]
-}
-
-input UserCreateInput {
-  email: String!
-  id: ID
-  name: String
-  posts: PostCreateManyWithoutPostsInput
+  feed: [Movie!]!
+  filterMovies(searchString: String): [Movie!]!
+  movie(where: MovieWhereUniqueInput!): Movie
 }

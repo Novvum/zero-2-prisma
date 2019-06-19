@@ -3,17 +3,17 @@
   "steps": [
     {
       "stepType": "CreateModel",
-      "name": "User",
+      "name": "Hero",
       "embedded": false
     },
     {
       "stepType": "CreateModel",
-      "name": "Post",
+      "name": "Movie",
       "embedded": false
     },
     {
       "stepType": "CreateField",
-      "model": "User",
+      "model": "Hero",
       "name": "id",
       "type": {
         "Base": "String"
@@ -34,7 +34,7 @@
     },
     {
       "stepType": "CreateField",
-      "model": "User",
+      "model": "Hero",
       "name": "email",
       "type": {
         "Base": "String"
@@ -44,7 +44,7 @@
     },
     {
       "stepType": "CreateField",
-      "model": "User",
+      "model": "Hero",
       "name": "name",
       "type": {
         "Base": "String"
@@ -54,13 +54,13 @@
     },
     {
       "stepType": "CreateField",
-      "model": "User",
-      "name": "posts",
+      "model": "Hero",
+      "name": "movies",
       "type": {
         "Relation": {
-          "to": "Post",
+          "to": "Movie",
           "to_fields": [],
-          "name": "PostToUser",
+          "name": "HeroToMovie",
           "on_delete": "None"
         }
       },
@@ -69,7 +69,7 @@
     },
     {
       "stepType": "CreateField",
-      "model": "Post",
+      "model": "Movie",
       "name": "id",
       "type": {
         "Base": "String"
@@ -90,7 +90,7 @@
     },
     {
       "stepType": "CreateField",
-      "model": "Post",
+      "model": "Movie",
       "name": "createdAt",
       "type": {
         "Base": "DateTime"
@@ -107,7 +107,7 @@
     },
     {
       "stepType": "CreateField",
-      "model": "Post",
+      "model": "Movie",
       "name": "updatedAt",
       "type": {
         "Base": "DateTime"
@@ -117,8 +117,8 @@
     },
     {
       "stepType": "CreateField",
-      "model": "Post",
-      "name": "published",
+      "model": "Movie",
+      "name": "released",
       "type": {
         "Base": "Boolean"
       },
@@ -127,7 +127,7 @@
     },
     {
       "stepType": "CreateField",
-      "model": "Post",
+      "model": "Movie",
       "name": "title",
       "type": {
         "Base": "String"
@@ -137,8 +137,8 @@
     },
     {
       "stepType": "CreateField",
-      "model": "Post",
-      "name": "content",
+      "model": "Movie",
+      "name": "description",
       "type": {
         "Base": "String"
       },
@@ -147,15 +147,15 @@
     },
     {
       "stepType": "CreateField",
-      "model": "Post",
-      "name": "author",
+      "model": "Movie",
+      "name": "mainHero",
       "type": {
         "Relation": {
-          "to": "User",
+          "to": "Hero",
           "to_fields": [
             "id"
           ],
-          "name": "PostToUser",
+          "name": "HeroToMovie",
           "on_delete": "None"
         }
       },
