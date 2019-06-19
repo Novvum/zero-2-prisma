@@ -3,7 +3,7 @@ import Photon from '@generated/photon';
 const photon = new Photon();
 
 async function main() {
-	await photon.heroes.create({
+	const capmarvel = await photon.heroes.create({
 		data: {
 			email: 'captain.marvel@marvel.com',
 			name: 'Captain Marvel',
@@ -17,24 +17,22 @@ async function main() {
 			}
 		}
 	});
-	await photon.heroes.create({
+	const ironman = await photon.heroes.create({
 		data: {
-			email: 'bob@prisma.io',
-			name: 'Bob',
+			email: 'stark@starkindustries.com',
+			name: 'Iron Man',
 			movies: {
-				create: [
-					{
-						title: 'Subscribe to GraphQL Weekly for community news',
-						released: true
-					},
-					{
-						title: 'Follow Prisma on Twitter',
-						released: false
-					}
-				]
+				create: {
+					title: 'Iron Man',
+					description:
+						'After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.',
+					released: true
+				}
 			}
 		}
 	});
+	console.log('Stored!', { ironman, capmarvel });
+	return { ironman, capmarvel };
 }
 
 main()

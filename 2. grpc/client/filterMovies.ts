@@ -17,13 +17,16 @@ function main() {
 		grpc.credentials.createInsecure()
 	);
 
-	client.filterMovies({ searchString: '' }, (err: any, response: any) => {
-		if (err) {
-			console.error(err);
-			return;
+	client.filterMovies(
+		{ searchString: 'Captain Marvel' },
+		(err: any, response: any) => {
+			if (err) {
+				console.error(err);
+				return;
+			}
+			console.log(response);
 		}
-		console.log(response);
-	});
+	);
 }
 
 main();
