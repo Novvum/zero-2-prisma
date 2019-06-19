@@ -2,6 +2,14 @@
 ### Do not make changes to this file directly
 
 
+type Hero {
+  id: ID!
+}
+
+type Movie {
+  id: ID!
+}
+
 type Mutation {
   _noop: Boolean!
 }

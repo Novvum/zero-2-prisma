@@ -4,6 +4,7 @@
  */
 
 import * as ctx from "../src/types"
+import * as photon from "@generated/photon"
 import { core } from "nexus"
 
 declare global {
@@ -24,6 +25,8 @@ export interface NexusGenEnums {
 }
 
 export interface NexusGenRootTypes {
+  Hero: photon.Hero;
+  Movie: photon.Movie;
   Mutation: {};
   Query: {};
   String: string;
@@ -37,6 +40,12 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 }
 
 export interface NexusGenFieldTypes {
+  Hero: { // field return type
+    id: string; // ID!
+  }
+  Movie: { // field return type
+    id: string; // ID!
+  }
   Mutation: { // field return type
     _noop: boolean; // Boolean!
   }
@@ -53,7 +62,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Mutation" | "Query";
+export type NexusGenObjectNames = "Hero" | "Movie" | "Mutation" | "Query";
 
 export type NexusGenInputNames = never;
 

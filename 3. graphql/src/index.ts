@@ -1,5 +1,6 @@
 import { GraphQLServer } from "graphql-yoga";
 import { join } from "path";
+
 import { makeSchema, objectType, idArg, stringArg } from "@prisma/nexus";
 import { Context } from "./types";
 
@@ -24,6 +25,12 @@ const nexusPrisma = nexusPrismaMethod({
     movies(after: String, before: String, first: Int, last: Int, skip: Int): [Movie!]
   }
  */
+export const Hero = objectType({
+  name: "Hero",
+  definition(t) {
+    t.model.id();
+  }
+});
 
 /**
  * Create a Movie type that uses the Movie type in the database
@@ -36,6 +43,12 @@ const nexusPrisma = nexusPrismaMethod({
     mainCharacter: Hero
   }
  */
+export const Movie = objectType({
+  name: "Movie",
+  definition: t => {
+    t.model.id();
+  }
+});
 
 /**
  * Query
@@ -71,13 +84,7 @@ const Mutation = objectType({
 });
 
 const schema = makeSchema({
-  types: [
-    Query,
-    Mutation,
-    // Movie,
-    // Hero,
-    nexusPrisma
-  ],
+  types: [Query, Mutation, Movie, Hero, nexusPrisma],
   outputs: {
     typegen: join(__dirname, "../generated/nexus-typegen.ts"),
     schema: join(__dirname, "/schema.graphql")

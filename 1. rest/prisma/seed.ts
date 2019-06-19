@@ -19,16 +19,16 @@ async function main() {
   });
   await photon.heroes.create({
     data: {
-      email: "bob@prisma.io",
+      email: "bob@marvel.com",
       name: "Bob",
       movies: {
         create: [
           {
-            title: "Subscribe to GraphQL Weekly for community news",
+            title: "Bob's World",
             released: true
           },
           {
-            title: "Follow Prisma on Twitter",
+            title: "Bob's World 2",
             released: false
           }
         ]
