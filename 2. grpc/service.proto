@@ -7,8 +7,6 @@ service MCU {
   rpc FilterHeroes(stream FilteredHeroesRequest) returns(stream FilteredHeroesResponse) {};
 }
 
-
-
 message Movie {
   string id = 1;
   string createdAt = 2;
