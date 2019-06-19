@@ -12,7 +12,7 @@ DROP TABLE "lift"."Post";
 
 CREATE TABLE "lift"."Hero"("id" TEXT NOT NULL  ,"name" TEXT   ,PRIMARY KEY ("id"));
 
-CREATE TABLE "lift"."Movie"("id" TEXT NOT NULL  ,"createdAt" DATE NOT NULL  ,"updatedAt" DATE NOT NULL DEFAULT '1970-01-01 00:00:00' ,"released" BOOLEAN NOT NULL DEFAULT false ,"title" TEXT NOT NULL DEFAULT '' ,"mainHero" TEXT   REFERENCES Hero(id),PRIMARY KEY ("id"));
+CREATE TABLE "lift"."Movie"("id" TEXT NOT NULL  ,"createdAt" DATE NOT NULL  ,"updatedAt" DATE NOT NULL DEFAULT '1970-01-01 00:00:00' ,"released" BOOLEAN NOT NULL DEFAULT false ,"title" TEXT NOT NULL DEFAULT '' ,"mainCharacter" TEXT   REFERENCES Hero(id),PRIMARY KEY ("id"));
 ```
 
 ## Changes
@@ -44,7 +44,7 @@ migration 20190618200226-init..20190618200932-changed-to-superheroes
      title     String
 -    content   String?
 -    author    User?
-+    mainHero  Hero?
++    mainCharacter  Hero?
  }
 ```
 
@@ -54,15 +54,14 @@ You can use a specific Photon built for this migration (20190618200932-changed-t
 in your `before` or `after` migration script like this:
 
 ```ts
-import Photon from '@generated/photon/20190618200932-changed-to-superheroes'
+import Photon from "@generated/photon/20190618200932-changed-to-superheroes";
 
-const photon = new Photon()
+const photon = new Photon();
 
 async function main() {
-  const result = await photon.users()
-  console.dir(result, { depth: null })
+  const result = await photon.users();
+  console.dir(result, { depth: null });
 }
 
-main()
-
+main();
 ```

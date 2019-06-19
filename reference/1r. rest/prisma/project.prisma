@@ -23,5 +23,5 @@ model Movie {
     released     Boolean
     title        String
     description  String?
-    mainHero     Hero?
+    mainCharacter     Hero?
 }

@@ -25,11 +25,7 @@
         "sequence": null
       },
       "default": {
-        "Expression": [
-          "cuid",
-          "String",
-          []
-        ]
+        "Expression": ["cuid", "String", []]
       }
     },
     {
@@ -81,11 +77,7 @@
         "sequence": null
       },
       "default": {
-        "Expression": [
-          "cuid",
-          "String",
-          []
-        ]
+        "Expression": ["cuid", "String", []]
       }
     },
     {
@@ -98,11 +90,7 @@
       "arity": "required",
       "isUnique": false,
       "default": {
-        "Expression": [
-          "now",
-          "DateTime",
-          []
-        ]
+        "Expression": ["now", "DateTime", []]
       }
     },
     {
@@ -148,13 +136,11 @@
     {
       "stepType": "CreateField",
       "model": "Movie",
-      "name": "mainHero",
+      "name": "mainCharacter",
       "type": {
         "Relation": {
           "to": "Hero",
-          "to_fields": [
-            "id"
-          ],
+          "to_fields": ["id"],
           "name": "HeroToMovie",
           "on_delete": "None"
         }

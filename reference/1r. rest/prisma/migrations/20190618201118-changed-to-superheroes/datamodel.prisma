@@ -22,5 +22,5 @@ model Movie {
     updatedAt DateTime @updatedAt
     released  Boolean
     title     String
-    mainHero  Hero?
+    mainCharacter  Hero?
 }

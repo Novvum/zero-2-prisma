@@ -25,14 +25,14 @@ migration 20190618201118-changed-to-superheroes..20190618202418-added-descriptio
 -    updatedAt DateTime @updatedAt
 -    released  Boolean
 -    title     String
--    mainHero  Hero?
+-    mainCharacter  Hero?
 +    id           String   @default(cuid()) @id @unique
 +    createdAt    DateTime @default(now())
 +    updatedAt    DateTime @updatedAt
 +    released     Boolean
 +    title        String
 +    description  String?
-+    mainHero     Hero?
++    mainCharacter     Hero?
  }
 ```
 
@@ -42,15 +42,14 @@ You can use a specific Photon built for this migration (20190618202418-added-des
 in your `before` or `after` migration script like this:
 
 ```ts
-import Photon from '@generated/photon/20190618202418-added-description-to-movie'
+import Photon from "@generated/photon/20190618202418-added-description-to-movie";
 
-const photon = new Photon()
+const photon = new Photon();
 
 async function main() {
-  const result = await photon.users()
-  console.dir(result, { depth: null })
+  const result = await photon.users();
+  console.dir(result, { depth: null });
 }
 
-main()
-
+main();
 ```

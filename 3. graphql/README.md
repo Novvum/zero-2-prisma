@@ -51,7 +51,7 @@ The schema that specifies the API operations of your GraphQL server is defined i
 
 Feel free to adjust any operation by adding or removing fields. The GraphQL Playground helps you with its auto-completion and query validation features.
 
-#### Retrieve all released movies and their mainHeros
+#### Retrieve all released movies and their mainCharacters
 
 ```graphql
 query {
@@ -60,7 +60,7 @@ query {
     title
     description
     released
-    mainHero {
+    mainCharacter {
       id
       name
       email
@@ -88,7 +88,7 @@ mutation {
   createMovie(
     title: "Join the Prisma Slack"
     description: "https://slack.prisma.io"
-    mainHeroEmail: "alice@prisma.io"
+    mainCharacterEmail: "alice@prisma.io"
   ) {
     id
     released
@@ -118,7 +118,7 @@ mutation {
     title
     description
     released
-    mainHero {
+    mainCharacter {
       id
       name
       email
@@ -136,7 +136,7 @@ mutation {
     title
     description
     released
-    mainHero {
+    mainCharacter {
       id
       name
       email

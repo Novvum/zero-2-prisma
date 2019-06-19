@@ -1,12 +1,20 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
-// import Photon from "@generated/photon";
+import Photon from "@generated/photon";
 
-// const photon = new Photon();
+const photon = new Photon();
 
 const app = express();
 
 app.use(bodyParser.json());
+
+async function cleanup() {
+  await photon.disconnect();
+  server.close();
+}
+
+process.on("SIGINT", cleanup);
+process.on("SIGTERM", cleanup);
 
 // GET
 
@@ -14,7 +22,7 @@ app.use(bodyParser.json());
  * `/feed`: Fetch all _released_ movies
  */
 app.get("/feed", async (req, res) => {
-  const movies; // TODO: Get all _released_ movies from DB
+  const movies = null; // TODO: Get all _released_ movies from DB
   res.json(movies);
 });
 
@@ -23,7 +31,7 @@ app.get("/feed", async (req, res) => {
  */
 app.get("/filterMovies", async (req, res) => {
   const { searchString } = req.query;
-  const movies; // TODO: Filter movies by `title` or `description`
+  const movies = null; // TODO: Filter movies by `title` or `description`
   res.json(movies);
 });
 
@@ -45,8 +53,9 @@ app.get(`/movie/:id`, async (req, res) => {
     - `email: String` (required): The email address of the hero
 */
 app.post(`/hero`, async (req, res) => {
-  const result; // get hero from photon
-  res.json(result);
+  const { name, email } = req.body;
+  const hero = null; // Create a new hero
+  res.json(hero);
 });
 
 /**
@@ -54,13 +63,18 @@ app.post(`/hero`, async (req, res) => {
   Body:
     - `title: String` (required): The title of the movie
     - `description: String` (optional): The description of the movie
-    - `mainHeroEmail: String` (required): The email of the hero that creates the movie
+    - `mainCharacterEmail: String` (required): The email of the hero that creates the movie
 */
 app.post(`/movie`, async (req, res) => {
-  const { title, mainHeroEmail, description } = req.body;
-  const response = {};
-  const movie; // TODO: create a movie
-  res.json();
+  const { title, description } = req.body;
+  const movie = await photon.movies.create({
+    data: {
+      title,
+      description,
+      released: false
+    }
+  });
+  res.json(movie);
 });
 
 // PUT
@@ -70,7 +84,7 @@ app.post(`/movie`, async (req, res) => {
 */
 app.put("/release/:id", async (req, res) => {
   const { id } = req.params;
-  const movie; // TODO: Set 'released' property to true for movie.
+  const movie = null; // TODO: Set 'released' property to true for movie.
   res.json(movie);
 });
 
@@ -81,18 +95,10 @@ app.put("/release/:id", async (req, res) => {
 */
 app.delete(`/movie/:id`, async (req, res) => {
   const { id } = req.params;
-  const movie; // TODO: Delete movie from DB
+  const movie = null; // TODO: Delete movie from DB
   res.json(movie);
 });
 
 const server = app.listen(3000, () =>
   console.log("Server is running on http://localhost:3000")
 );
-
-async function cleanup() {
-  await photon.disconnect();
-  server.close();
-}
-
-process.on("SIGINT", cleanup);
-process.on("SIGTERM", cleanup);

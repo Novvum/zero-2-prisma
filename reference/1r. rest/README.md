@@ -50,7 +50,7 @@ The server is now running on `http://localhost:3000`. You can send the API reque
   - Body:
     - `title: String` (required): The title of the movie
     - `description: String` (optional): The description of the movie
-    - `mainHeroEmail: String` (required): The email of the hero that creates the movie
+    - `mainCharacterEmail: String` (required): The email of the hero that creates the movie
 - `/hero`: Create a new hero
   - Body:
     - `name: String` (optional): The name of the hero
