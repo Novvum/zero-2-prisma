@@ -1,0 +1,162 @@
+{
+  "version": "0.0.106",
+  "steps": [
+    {
+      "stepType": "CreateModel",
+      "name": "Hero",
+      "embedded": false
+    },
+    {
+      "stepType": "DeleteModel",
+      "name": "Character"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Hero",
+      "name": "id",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": true,
+      "id": {
+        "strategy": "Auto",
+        "sequence": null
+      },
+      "default": {
+        "Expression": [
+          "cuid",
+          "String",
+          []
+        ]
+      }
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Hero",
+      "name": "email",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": true
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Hero",
+      "name": "name",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "optional",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Hero",
+      "name": "movies",
+      "type": {
+        "Relation": {
+          "to": "Movie",
+          "to_fields": [],
+          "name": "HeroToMovie",
+          "on_delete": "None"
+        }
+      },
+      "arity": "list",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Movie",
+      "name": "released",
+      "type": {
+        "Base": "Boolean"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Movie",
+      "name": "title",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Movie",
+      "name": "description",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "optional",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Movie",
+      "name": "mainCharacter",
+      "type": {
+        "Relation": {
+          "to": "Hero",
+          "to_fields": [
+            "id"
+          ],
+          "name": "HeroToMovie",
+          "on_delete": "None"
+        }
+      },
+      "arity": "optional",
+      "isUnique": false
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "Movie",
+      "name": "film"
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "Movie",
+      "name": "releaseYear"
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "Movie",
+      "name": "budget"
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "Movie",
+      "name": "runningTime"
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "Movie",
+      "name": "domesticGross"
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "Movie",
+      "name": "weekendGross"
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "Movie",
+      "name": "overseasGross"
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "Movie",
+      "name": "worldwideGross"
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "Movie",
+      "name": "characters"
+    }
+  ]
+}

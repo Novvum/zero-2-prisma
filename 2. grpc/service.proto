@@ -4,7 +4,7 @@ package mcu;
 
 service MCU {
   rpc FilterMovies(FilteredMoviesRequest) returns (FilteredMoviesResponse) {};
-  rpc FilterCharacters(FilteredCharactersRequest) returns(FilteredCharactersResponse) {};
+  rpc FilterHeroes(FilteredHeroesRequest) returns(FilteredHeroesResponse) {};
 }
 
 
@@ -13,48 +13,20 @@ message Movie {
   string id = 1;
   string createdAt = 2;
   string updatedAt = 3;
-  string film = 4;
-  int64 releaseYear = 5;
-  float budget = 6;
-  int64 runningTime = 7;
-  int64 domesticGross = 8;
-  int64 weekendGross = 9;
-  int64 overseasGross = 10;
-  int64 worldwideGross = 11;
-  Characters characters = 12;
+  bool released = 4;
+  string title = 5;
+  string description = 6;
+  repeated Hero mainHero = 7;
 
 }
 
-message Character {
+message Hero {
   string id = 1;
   string createdAt = 2;
   string updatedAt = 3;
-  string marvelId = 4;
+  string email = 4;
   string name = 5;
-  string description = 6;
-  string thumbnail = 7;
-  Movies movies = 8;
-}
-
-message Characters {
-  repeated Character id = 1;
-}
-
-message Movies {
-  repeated Movie id = 1;
-}
-
-message MovieRequest {
-  string film = 1;
-}
-
-
-message MovieResponse {
-  repeated Movie id = 1;
-}
-
-message CharacterRequest {
-  string name = 1;
+  Movie movies = 6;
 }
 
 message FilteredMoviesRequest {
@@ -65,10 +37,10 @@ message FilteredMoviesResponse {
   repeated Movie filteredMovie = 1;
 }
 
-message FilteredCharactersRequest {
+message FilteredHeroesRequest {
   string searchString = 1;
 }
 
-message FilteredCharactersResponse {
-  repeated Movie filteredMovie = 1;
+message FilteredHeroesResponse {
+  repeated Hero filteredHero = 1;
 }
