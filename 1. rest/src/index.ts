@@ -90,7 +90,7 @@ const server = app.listen(3000, () =>
 );
 
 async function cleanup() {
-  // await photon.disconnect();
+  await photon.disconnect();
   server.close();
 }
 

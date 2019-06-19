@@ -8,3 +8,22 @@ generator photon {
     provider = "photonjs"
     output   = "node_modules/@generated/photon"
 }
+
+/*
+TODO: Create a Hero model with:
+- id (@default(cuid()) @id @unique)
+- email (@unique)
+- name (optional)
+- movies (list of movies)
+*/
+
+/*
+TODO: Create a Movie model with:
+- id (@default(cuid()) @id @unique)
+- createdAt (@default(now()))
+- updatedAt (@updatedAt)
+- released (boolean)
+- title
+- description (optional)
+- mainHero (optional)
+*/
