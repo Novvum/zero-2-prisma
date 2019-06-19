@@ -18,7 +18,7 @@ message Movie {
   number budget = 6;
   number runningTime = 7;
   number domesticGross = 8;
-  number weekendGross - 9;
+  number weekendGross = 9;
   number overseasGross = 10;
   number worldwideGross = 11;
   Characters characters = 12;
