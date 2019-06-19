@@ -1,8 +1,9 @@
 import { GraphQLServer } from "graphql-yoga";
 import { join } from "path";
 import { makeSchema, objectType, idArg, stringArg } from "@prisma/nexus";
-import Photon from "@generated/photon";
 import { Context } from "./types";
+
+import Photon from "@generated/photon";
 import { nexusPrismaMethod } from "@generated/nexus-prisma";
 
 const photon = new Photon();
@@ -11,131 +12,72 @@ const nexusPrisma = nexusPrismaMethod({
   photon: (ctx: Context) => ctx.photon
 });
 
-export const Hero = objectType({
-  name: "Hero",
-  definition(t) {
-    t.model.id();
-    t.model.name();
-    t.model.email();
-    t.model.movies({
-      pagination: false
-    });
-  }
-});
+// Types
 
-export const Movie = objectType({
-  name: "Movie",
-  definition(t) {
-    t.model.id();
-    t.model.title();
-    t.model.description();
-    t.model.released();
-    t.model.mainHero();
+/**
+ * Create a Hero type that uses the Hero type in the database
+ * SDL:
+  type Hero {
+    id: ID!
+    email: String!
+    name: String
+    movies(after: String, before: String, first: Int, last: Int, skip: Int): [Movie!]
   }
-});
+ */
 
+/**
+ * Create a Movie type that uses the Movie type in the database
+ * SDL:
+  type Movie {
+    id: ID!
+    title: String!
+    description: String
+    released: Boolean!
+    mainHero: Hero
+  }
+ */
+
+/**
+ * Query
+ * SDL:
+  type Query {
+    movie(where: MovieWhereUniqueInput!): Movie # directly from crud
+    feed: [Movie!]!
+    filterMovies(searchString: String): [Movie!]!
+  }
+ */
 const Query = objectType({
   name: "Query",
   definition(t) {
-    t.crud.findOneMovie({
-      alias: "movie"
-    });
-
-    t.list.field("feed", {
-      type: "Movie",
-      resolve: (parent, args, ctx) => {
-        return ctx.photon.movies.findMany({
-          where: { released: true }
-        });
-      }
-    });
-
-    t.list.field("filterMovies", {
-      type: "Movie",
-      args: {
-        searchString: stringArg({ nullable: true })
-      },
-      resolve: (parent, { searchString }, ctx) => {
-        return ctx.photon.movies.findMany({
-          where: {
-            OR: [
-              {
-                title: {
-                  contains: searchString
-                }
-              },
-              {
-                description: {
-                  contains: searchString
-                }
-              }
-            ]
-          }
-        });
-      }
-    });
+    t.boolean("_noop");
   }
 });
 
+/**
+ * Mutation
+ * SDL:
+  type Mutation {
+    signupHero(data: HeroCreateInput!): Hero! # directly from crud
+    deleteMovie(id: ID!): Movie!
+    createMovie(description: String, mainHeroEmail: String, title: String): Movie!
+    release(id: ID): Movie
+  }
+ */
 const Mutation = objectType({
   name: "Mutation",
   definition(t) {
-    t.crud.createOneHero({ alias: "signupHero" });
-    t.field("deleteMovie", {
-      type: "Movie",
-      args: {
-        id: idArg({
-          nullable: false
-        })
-      },
-      resolve: (parent, { id }, ctx) => {
-        return ctx.photon.movies.delete({
-          where: {
-            id: id
-          }
-        });
-      }
-    });
-
-    t.field("createMovie", {
-      type: "Movie",
-      args: {
-        title: stringArg(),
-        description: stringArg({ nullable: true }),
-        mainHeroEmail: stringArg()
-      },
-      resolve: (parent, { title, description, mainHeroEmail }, ctx) => {
-        return ctx.photon.movies.create({
-          data: {
-            title,
-            description,
-            released: false,
-            mainHero: {
-              connect: { email: mainHeroEmail }
-            }
-          }
-        });
-      }
-    });
-
-    t.field("release", {
-      type: "Movie",
-      nullable: true,
-      args: {
-        id: idArg()
-      },
-      resolve: (parent, { id }, ctx) => {
-        return ctx.photon.movies.update({
-          where: { id },
-          data: { released: true }
-        });
-      }
-    });
+    t.boolean("_noop");
   }
 });
 
 const schema = makeSchema({
-  types: [Query, Mutation, Movie, Hero, nexusPrisma],
+  types: [
+    Query,
+    Mutation,
+    // Movie,
+    // Hero,
+    nexusPrisma
+  ],
   outputs: {
     typegen: join(__dirname, "../generated/nexus-typegen.ts"),
     schema: join(__dirname, "/schema.graphql")
