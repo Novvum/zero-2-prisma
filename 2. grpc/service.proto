@@ -14,13 +14,13 @@ message Movie {
   string createdAt = 2;
   string updatedAt = 3;
   string film = 4;
-  number releaseYear = 5;
-  number budget = 6;
-  number runningTime = 7;
-  number domesticGross = 8;
-  number weekendGross = 9;
-  number overseasGross = 10;
-  number worldwideGross = 11;
+  int64 releaseYear = 5;
+  float budget = 6;
+  int64 runningTime = 7;
+  int64 domesticGross = 8;
+  int64 weekendGross = 9;
+  int64 overseasGross = 10;
+  int64 worldwideGross = 11;
   Characters characters = 12;
 
 }
