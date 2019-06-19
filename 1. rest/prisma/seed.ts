@@ -5,11 +5,13 @@ const photon = new Photon();
 async function main() {
   await photon.heroes.create({
     data: {
-      email: "alice@prisma.io",
-      name: "Alice",
+      email: "captain.marvel@marvel.com",
+      name: "Captain Marvel",
       movies: {
         create: {
-          title: "Join us for Prisma Day 2019 in Berlin",
+          title: "Captain Marvel",
+          description:
+            "Carol Danvers becomes one of the universe's most powerful heroes when Earth is caught in the middle of a galactic war between two alien races.",
           released: true
         }
       }
