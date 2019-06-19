@@ -1330,11 +1330,6 @@ prisma-generate-schema@1.34.0:
     popsicle "10"
     prisma-datamodel "1.34.0"
 
-prisma2@^0.0.83:
-  version "0.0.83"
-  resolved "https://registry.npmjs.org/prisma2/-/prisma2-0.0.83.tgz#1b882d9e32d8e4aec82ec59f06c6d4babd949b80"
-  integrity sha512-tVUO2PisvIsPkAMuTkyhCy5ICFxCdUyscuRTwlxbMhI3ey1DxafJtTszmzI8mXfC5oAkWbplPIIPQ/8Uv9IglQ==
-
 process-nextick-args@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.0.tgz#a37d732f4271b4ab1ad070d35508e8290788ffaa"
