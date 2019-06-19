@@ -40,7 +40,7 @@ app.get("/filterMovies", async (req, res) => {
  */
 app.get(`/movie/:id`, async (req, res) => {
   const { id } = req.params;
-  const movie; // TODO: Fetch a single movie by its `id`
+  const movie = null; // TODO: Fetch a single movie by its `id`
   res.json(movie);
 });
 
