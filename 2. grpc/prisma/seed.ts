@@ -21,7 +21,7 @@ const movies = mcu.map((movie) => {
 	movie.captainAmerica && char.push(characters[11]);
 	let res: any = {};
 	for (var i = 0; i < char.length; i++) {
-		res.create = +char[i];
+		res.create = char[i];
 	}
 	const m = {
 		film: movie.film,
@@ -33,11 +33,14 @@ const movies = mcu.map((movie) => {
 		overseasGross: movie.overseasGross,
 		worldwideGross: movie.worldwideGross
 	};
+
 	return char.length > 1 ? { ...m, characters: res } : m;
 });
 const photon = new Photon();
 
 async function main() {
+	const fs = require('fs');
+	await fs.writeFileSync('./newthing.json', JSON.stringify(movies));
 	const films = await movies.map(
 		async (data) =>
 			await photon.movies.create({
