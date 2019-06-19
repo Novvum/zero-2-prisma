@@ -11,17 +11,15 @@ generator photon {
 
 model Hero {
     id    String  @default(cuid()) @id @unique
-    email String @unique
     name  String?
     movies Movie[]
 }
 
 model Movie {
-    id           String   @default(cuid()) @id @unique
-    createdAt    DateTime @default(now())
-    updatedAt    DateTime @updatedAt
-    released     Boolean
-    title        String
-    description  String?
-    mainHero     Hero?
+    id        String   @default(cuid()) @id @unique
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    released  Boolean
+    title     String
+    mainHero  Hero?
 }

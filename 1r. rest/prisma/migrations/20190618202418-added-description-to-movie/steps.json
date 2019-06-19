@@ -1,0 +1,15 @@
+{
+  "version": "0.0.97",
+  "steps": [
+    {
+      "stepType": "CreateField",
+      "model": "Movie",
+      "name": "description",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "optional",
+      "isUnique": false
+    }
+  ]
+}
