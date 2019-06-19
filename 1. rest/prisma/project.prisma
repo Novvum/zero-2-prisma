@@ -9,19 +9,21 @@ generator photon {
     output   = "node_modules/@generated/photon"
 }
 
-model Hero {
-    id    String  @default(cuid()) @id @unique
-    email String @unique
-    name  String?
-    movies Movie[]
-}
+/*
+TODO: Create a Hero model with:
+- id (@default(cuid()) @id @unique)
+- email (@unique)
+- name (optional)
+- movies (list of movies)
+*/
 
-model Movie {
-    id           String   @default(cuid()) @id @unique
-    createdAt    DateTime @default(now())
-    updatedAt    DateTime @updatedAt
-    released     Boolean
-    title        String
-    description  String?
-    mainHero     Hero?
-}
+/*
+TODO: Create a Movie model with:
+- id (@default(cuid()) @id @unique)
+- createdAt (@default(now()))
+- updatedAt (@updatedAt)
+- released (boolean)
+- title
+- description (optional)
+- mainHero (optional)
+*/

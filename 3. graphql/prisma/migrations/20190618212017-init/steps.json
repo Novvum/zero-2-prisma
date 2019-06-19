@@ -1,5 +1,5 @@
 {
-  "version": "0.0.97",
+  "version": "0.0.106",
   "steps": [
     {
       "stepType": "CreateModel",
@@ -10,14 +10,6 @@
       "stepType": "CreateModel",
       "name": "Movie",
       "embedded": false
-    },
-    {
-      "stepType": "DeleteModel",
-      "name": "User"
-    },
-    {
-      "stepType": "DeleteModel",
-      "name": "Post"
     },
     {
       "stepType": "CreateField",
@@ -39,6 +31,16 @@
           []
         ]
       }
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Hero",
+      "name": "email",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "required",
+      "isUnique": true
     },
     {
       "stepType": "CreateField",
@@ -131,6 +133,16 @@
         "Base": "String"
       },
       "arity": "required",
+      "isUnique": false
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Movie",
+      "name": "description",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "optional",
       "isUnique": false
     },
     {
