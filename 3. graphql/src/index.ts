@@ -63,6 +63,7 @@ const Query = objectType({
   name: "Query",
   definition(t) {
     t.boolean("_noop");
+    // t.crud.findOneMovie
   }
 });
 
