@@ -1,0 +1,117 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:dev.db"
+  default  = true
+}
+
+generator photon {
+  provider = "photonjs"
+  output   = "node_modules/@generated/photon"
+}
+
+generator nexus_prisma {
+  provider = "nexus-prisma"
+  output   = "node_modules/@generated/nexus-prisma"
+}
+
+model Album {
+  id     String  @default(cuid()) @id @unique
+  title  String
+  artist Artist?
+  year   Int
+  tracks Track[]
+}
+
+model Track {
+  id           String     @default(cuid()) @id @unique
+  name         String
+  album        Album?
+  albumId      Int?
+  mediaType    MediaType
+  genre        Genre
+  composers    String[]
+  milliseconds Int
+  unitPrice    Float?
+  playlists    Playlist[]
+}
+
+enum MediaType {
+  mp3
+  wav
+  aax
+  aiff
+  msv
+  webm
+}
+
+model Genre {
+  id     String  @default(cuid()) @id @unique
+  name   String
+  tracks Track[]
+}
+
+model Artist {
+  id     String  @default(cuid()) @id @unique
+  name   String
+  albums Album[]
+}
+
+model Customer {
+  id         String    @default(cuid()) @id @unique
+  FirstName  String
+  LastName   String
+  Company    String
+  Address    String
+  City       String
+  State      String
+  Country    String
+  PostalCode String
+  Phone      String
+  Fax        String
+  Email      String
+  supportRep Employee?
+}
+
+model Employee {
+  id         String   @default(cuid()) @id @unique
+  FirstName  String
+  LastName   String
+  Title      String
+  BirthDate  DateTime
+  HireDate   DateTime
+  Address    String
+  City       String
+  State      String
+  Country    String
+  PostalCode String
+  Phone      String
+  Fax        String
+  Email      String
+}
+
+model Invoice {
+  id                String        @default(cuid()) @id @unique
+  Customer          Customer
+  InvoiceDate       DateTime
+  BillingAddress    String
+  BillingCity       String
+  BillingState      String
+  BillingCountry    String
+  BillingPostalCode String
+  Total             Float
+  Lines             InvoiceLine[]
+}
+
+model InvoiceLine {
+  id        String   @default(cuid()) @id @unique
+  Invoice   Invoice?
+  Track     Track?
+  UnitPrice Float
+  Quantity  Int
+}
+
+model Playlist {
+  id     String  @default(cuid()) @id @unique
+  Name   String
+  Tracks Track[]
+}
